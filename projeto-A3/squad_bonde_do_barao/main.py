@@ -7,7 +7,7 @@ def dividir(numerador, divisor):
 
 while True:
     try:
-        nome_empresa = str(input("Digite o nome da empresa: ")).strip
+        nome_empresa = str(input("Digite o nome da empresa: ")).strip()
         
         ativo_circulante = float(input("Digite o ativo circulante: "))
         ativo_nao_circulante = float(input("Digite o ativo não circulante: "))
