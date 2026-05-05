@@ -1,4 +1,4 @@
-print("-=-=- ANALISADOR FINANCEIRO -=-=-")
+print("-=-=-=- ANALISADOR FINANCEIRO -=-=-=-")
 
 def dividir(numerador, divisor):
     if divisor != 0:
@@ -7,7 +7,7 @@ def dividir(numerador, divisor):
 
 while True:
     try:
-        nome_empresa = str(input("Digite o nome da empresa: ")).strip()
+        nome_empresa = input("Digite o nome da empresa: ").strip()
         
         ativo_circulante = float(input("Digite o ativo circulante: "))
         ativo_nao_circulante = float(input("Digite o ativo não circulante: "))
@@ -17,6 +17,7 @@ while True:
         receita = float(input("Digite a receita: "))
         estoque = float(input("Digite o estoque: "))
         lucro = float(input("Digite o lucro: "))
+
     except ValueError:
         print("Digite apenas números!")
         continue
@@ -24,7 +25,7 @@ while True:
     ativo_total = ativo_circulante + ativo_nao_circulante
     passivo_total = passivo_circulante + passivo_nao_circulante
 
-    if abs(ativo_total - (passivo_total + patrimonio_liquido)) > 0.01:
+    if ativo_total != (passivo_total + patrimonio_liquido):
         print("\nA soma do passivo total e do patrimonio liquido deve ser igual ao ativo total!")
         continue
 
@@ -34,7 +35,7 @@ while True:
     margem_liquida = dividir(lucro, receita)
     roe = dividir(lucro, patrimonio_liquido)
 
-    print(f"\n===== RELATÓRIO FINANCEIRO: {nome_empresa.upper()} =====\n")
+    print(f"\n-=-=-=- RELATÓRIO FINANCEIRO: {nome_empresa.upper()} -=-=-=-\n")
 
     print(f"Liquidez corrente: {liquidez_corrente:.2f} (R$ {ativo_circulante:.2f} / R$ {passivo_circulante:.2f})")
     if liquidez_corrente > 1:
@@ -78,7 +79,7 @@ while True:
     else:
         print("❌ Prejuízo")
 
-    print("\n===== RESUMO =====")
+    print("\n-=-=-=- RESUMO -=-=-=-")
     print(f"Ativos totais: R$ {ativo_total:.2f}")
     print(f"Dívidas totais: R$ {passivo_total:.2f}")
 
