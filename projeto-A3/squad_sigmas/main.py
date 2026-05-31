@@ -1,17 +1,20 @@
 import cli_ingestao
 import etl_transformer
 import data_warehouse_poo
+import dashboard_viz
 
-banco_de_dados = []
+banco = data_warehouse_poo.BancoDeDados()
 
+# Formato: data,produto,quantidade,valor,estado
 texto_bruto = cli_ingestao.coletar_dados()
 
 matriz = etl_transformer.limpar_dados(texto_bruto)
 
 if matriz:
     for linha in matriz:
-        venda_dicionario = data_warehouse_poo.criar_venda(linha)
-        banco_de_dados.append(venda_dicionario)
+        banco.adicionar(linha)
 
 print("\n--- EXIBINDO DADOS ---")
-data_warehouse_poo.mostrar_tudo(banco_de_dados)
+banco.mostrar_tudo()
+
+dashboard_viz.exibir_dashboard(banco.registros, lambda v: v.get_valor_total())
