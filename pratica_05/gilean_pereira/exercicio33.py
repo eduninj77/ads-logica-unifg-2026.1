@@ -1,0 +1,1 @@
+print("Questao 33: reposta letra D) 8")

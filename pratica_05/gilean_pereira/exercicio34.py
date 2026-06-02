@@ -1,0 +1,1 @@
+print("Questao 34: reposta letra B) notas[4][2]")

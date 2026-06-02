@@ -1,0 +1,1 @@
+print("Questao 36: resposta C) O laço externo pode percorrer as linhas, enquanto o laço interno percorre os elementos de cada linha.")

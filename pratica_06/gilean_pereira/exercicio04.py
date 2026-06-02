@@ -1,0 +1,26 @@
+class Estudante:
+    def __init__(self, nome, matricula):
+        self.nome = nome
+        self.matricula = matricula
+        self.notas = []
+
+    def adicionar_nota(self, nota):
+        self.notas.append(nota)
+
+
+    def calcular_media(self):
+        if len(self.notas) == 0:
+            return 0
+        return sum(self.notas) / len(self.notas)
+
+
+aluno = Estudante("Mariana", "20260123")
+
+
+print(f"Média inicial (sem notas): {aluno.calcular_media()}")
+
+
+aluno.adicionar_nota(8.0)
+aluno.adicionar_nota(10.0)
+print(f"Notas: {aluno.notas}")
+print(f"Média calculada: {aluno.calcular_media()}")
