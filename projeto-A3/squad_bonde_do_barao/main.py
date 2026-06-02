@@ -1,96 +1,131 @@
+from banco_poo import Empresa, DemonstracaoAnual
+from motor_indices import calcular_indices
+from painel_evolutivo import analise_horizontal
+
 print("-=-=-=- ANALISADOR FINANCEIRO -=-=-=-")
 
-def dividir(numerador, divisor):
-    if divisor != 0:
-        return numerador / divisor
-    return 0
+nome_empresa = input("Digite o nome da empresa: ")
 
-while True:
-    try:
-        nome_empresa = input("Digite o nome da empresa: ").strip()
-        
-        ativo_circulante = float(input("Digite o ativo circulante: "))
-        ativo_nao_circulante = float(input("Digite o ativo não circulante: "))
-        passivo_circulante = float(input("Digite o passivo circulante: "))
-        passivo_nao_circulante = float(input("Digite o passivo não circulante: "))
-        patrimonio_liquido = float(input("Digite o patrimonio liquido: "))
-        receita = float(input("Digite a receita: "))
-        estoque = float(input("Digite o estoque: "))
-        lucro = float(input("Digite o lucro: "))
+empresa = Empresa(nome_empresa)
 
-    except ValueError:
-        print("Digite apenas números!")
-        continue
+for ano in [2023, 2024, 2025]:
 
-    ativo_total = ativo_circulante + ativo_nao_circulante
-    passivo_total = passivo_circulante + passivo_nao_circulante
+    print(f"\n===== CADASTRO {ano} =====")
 
-    if ativo_total != (passivo_total + patrimonio_liquido):
-        print("\nA soma do passivo total e do patrimonio liquido deve ser igual ao ativo total!")
-        continue
+    while True:
 
-    liquidez_corrente = dividir(ativo_circulante, passivo_circulante)
-    liquidez_seca = dividir((ativo_circulante - estoque), passivo_circulante)
-    endividamento = dividir(passivo_total, ativo_total)
-    margem_liquida = dividir(lucro, receita)
-    roe = dividir(lucro, patrimonio_liquido)
+        try:
+            ativo_circulante = float(
+                input("Ativo circulante: ")
+            )
 
-    print(f"\n-=-=-=- RELATÓRIO FINANCEIRO: {nome_empresa.upper()} -=-=-=-\n")
+            ativo_nao_circulante = float(
+                input("Ativo não circulante: ")
+            )
 
-    print(f"Liquidez corrente: {liquidez_corrente:.2f} (R$ {ativo_circulante:.2f} / R$ {passivo_circulante:.2f})")
-    if liquidez_corrente > 1:
-        print("✅ BOM — consegue pagar dívidas de curto prazo")
-    elif liquidez_corrente == 1:
-        print("⚠️ ALERTA — no limite")
-    else:
-        print("❌ PERIGO — risco de não pagar dívidas")
+            passivo_circulante = float(
+                input("Passivo circulante: ")
+            )
 
-    print(f"\nLiquidez seca: {liquidez_seca:.2f} (sem estoques)")
-    if liquidez_seca > 1:
-        print("✅ Muito boa")
-    elif liquidez_seca == 1:
-        print("⚠️ No limite")
-    else:
-        print("❌ Baixa — depende de vender estoque")
+            passivo_nao_circulante = float(
+                input("Passivo não circulante: ")
+            )
 
-    print(f"\nEndividamento: {endividamento:.2f} ({endividamento*100:.2f}%)")
-    if endividamento < 0.5:
-        print("✅ Saudável")
-    elif endividamento <= 0.8:
-        print("⚠️ Atenção")
-    else:
-        print("❌ Alto risco — muita dívida")
+            patrimonio_liquido = float(
+                input("Patrimônio líquido: ")
+            )
 
-    print(f"\nMargem líquida: {margem_liquida*100:.2f}%")
-    if margem_liquida > 0:
-        print("✅ Empresa lucrando")
-    elif margem_liquida == 0:
-        print("⚠️ Empate")
-    else:
-        print("❌ Prejuízo")
+            receita = float(
+                input("Receita: ")
+            )
 
-    print(f"\nROE: {roe*100:.2f}%")
-    if roe > 0.20:
-        print("🏆 Excelente retorno")
-    elif roe > 0.10:
-        print("✅ Bom retorno")
-    elif roe > 0:
-        print("⚠️ Retorno baixo")
-    else:
-        print("❌ Prejuízo")
+            estoque = float(
+                input("Estoque: ")
+            )
 
-    print("\n-=-=-=- RESUMO -=-=-=-")
-    print(f"Ativos totais: R$ {ativo_total:.2f}")
-    print(f"Dívidas totais: R$ {passivo_total:.2f}")
+            lucro = float(
+                input("Lucro: ")
+            )
 
-    if liquidez_corrente > 1 and margem_liquida > 0 and endividamento < 0.5:
-        print("🏆 Empresa saudável e equilibrada")
-    elif lucro < 0:
-        print("⚠️ Empresa operando no prejuízo")
-    else:
-        print("⚠️ Empresa mediana / precisa de atenção")
+        except ValueError:
+            print("Digite apenas números!")
+            continue
 
-    opcao = input("\nDeseja analisar outra empresa? (s/n): ").lower()
-    if opcao != "s":
-        print("Encerrando programa...")
+        ativo_total = (
+            ativo_circulante +
+            ativo_nao_circulante
+        )
+
+        passivo_total = (
+            passivo_circulante +
+            passivo_nao_circulante
+        )
+
+        if ativo_total != (
+            passivo_total +
+            patrimonio_liquido
+        ):
+            print(
+                "\nERRO: "
+                "Ativo Total deve ser igual "
+                "a Passivo Total + Patrimônio Líquido."
+            )
+            continue
+
+        demonstracao = DemonstracaoAnual(
+            ano,
+            ativo_circulante,
+            ativo_nao_circulante,
+            passivo_circulante,
+            passivo_nao_circulante,
+            patrimonio_liquido,
+            receita,
+            estoque,
+            lucro
+        )
+
+        empresa.adicionar_demonstracao(
+            demonstracao
+        )
+
         break
+
+print(
+    f"\n===== RELATÓRIO: "
+    f"{empresa.nome.upper()} ====="
+)
+
+for demonstracao in empresa.historico:
+
+    indices = calcular_indices(demonstracao)
+
+    print(
+        f"\nAno: {demonstracao.ano}"
+    )
+
+    print(
+        f"Liquidez Corrente: "
+        f"{indices['liquidez_corrente']:.2f}"
+    )
+
+    print(
+        f"Liquidez Seca: "
+        f"{indices['liquidez_seca']:.2f}"
+    )
+
+    print(
+        f"Endividamento: "
+        f"{indices['endividamento'] * 100:.2f}%"
+    )
+
+    print(
+        f"Margem Líquida: "
+        f"{indices['margem_liquida'] * 100:.2f}%"
+    )
+
+    print(
+        f"ROE: "
+        f"{indices['roe'] * 100:.2f}%"
+    )
+
+analise_horizontal(empresa)
