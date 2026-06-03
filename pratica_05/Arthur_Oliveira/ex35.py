@@ -1,0 +1,1 @@
+#B) Loop duplo com if assento == "L" — percorre cada elemento individualmente, chegando nos valores reais "L" e "O".

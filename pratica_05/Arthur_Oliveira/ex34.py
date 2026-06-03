@@ -1,0 +1,1 @@
+#Resposta: B) notas[4][2]
