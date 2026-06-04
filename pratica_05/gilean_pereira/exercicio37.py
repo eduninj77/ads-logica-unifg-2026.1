@@ -1,0 +1,1 @@
+print("Questao 37: resposta C) O código apresenta erro, pois a linha de índice 1 não possui coluna de índice 2.")
