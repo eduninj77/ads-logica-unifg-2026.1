@@ -1,0 +1,5 @@
+print("1. Em uma matriz, cada sublista pode ser interpretada como uma linha")
+print("2. A estrutura que agrupa todas as sublistas é chamada de lista externa")
+print("3. O valor armazenado em uma posição específica é chamado de elemento")
+print("4. Em matriz[2][0], o índice 2 seleciona a linha")
+print("5. Em matriz[2][0], o índice 0 seleciona a coluna dentro da linha")

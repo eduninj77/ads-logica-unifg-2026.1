@@ -1,0 +1,5 @@
+print("1. F - O primeiro índice em Python é 0")
+print("2. V - i indica linha, j indica coluna")
+print("3. F - Uma lista de listas pode ter linhas com diferentes tamanhos")
+print("4. V - Uma matriz pode representar um boletim escolar")
+print("5. V - Para percorrer uma matriz, geralmente usamos laços aninhados")
