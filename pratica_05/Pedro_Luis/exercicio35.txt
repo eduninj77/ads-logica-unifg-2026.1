@@ -1,0 +1,6 @@
+B)
+livres = 0
+for linha in sala:
+    for assento in linha:
+        if assento == "L":
+            livres += 1

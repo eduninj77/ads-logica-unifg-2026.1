@@ -1,0 +1,8 @@
+1. Ele não executa corretamente por ter tentado mostrar uma linha inexistente, acarretando em uma excessão de IndexError(tentando achar um índice inexistente na lista)
+2. dados[0][0]; dados[0][1] ou dados[0][-1]; dados[1][0]; dados[1][1] ou dados[-1][-1] ou dados[1][-1]
+3. dados = [
+    [1, 2],
+    [3, 4]
+]
+
+print(dados[-1][0])
