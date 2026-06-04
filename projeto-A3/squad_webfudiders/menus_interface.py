@@ -1,3 +1,13 @@
+##################################################
+#                                                #
+#                                                #
+#               by: Luiza Cezar                  #
+#                                                #
+#                                                #
+##################################################
+
+
+
 def ler_numero_decimal(mensagem, minimo, maximo):
     while True:
         entrada = input(mensagem)
